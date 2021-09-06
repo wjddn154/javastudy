@@ -31,6 +31,7 @@ public class Prob3 {
 //				number=number-2;
 //			}
 //		}
+		
 		System.out.println("결과 값 : " + sum);
 		scanner.close();
 	}

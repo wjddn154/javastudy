@@ -9,9 +9,11 @@ public class Prob4 {
 
 		System.out.print("문자열을 입력하세요 : ");
 		String text = scanner.nextLine();
-
-		for(int i=text.length(); i<=0; i--) {
+		int length = text.length();
+		for(int i=1; i<=length; i++) {
+			System.out.print(text.substring(0, i));
 			System.out.println();
+			
 		}
 		
 		scanner.close();
