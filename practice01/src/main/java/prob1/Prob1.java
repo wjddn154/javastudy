@@ -25,7 +25,6 @@ public class Prob1 {
 			} 
 		}
 
-		
 		if(check==false) {
 			System.out.println("숫자가 아닙니다!");
 		} else {
