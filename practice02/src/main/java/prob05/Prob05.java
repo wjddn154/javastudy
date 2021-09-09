@@ -9,9 +9,9 @@ public class Prob05 {
 		Scanner scanner = new Scanner( System.in );
 		System.out.println("수를 결정하였습니다. 맞추어 보세요!");
 		
-		int lowScore = 1;
-		int highScore = 100;
-		int action = 1;
+		int lowScore = 1;		//낮은 값
+		int highScore = 100;	//높은 값
+		int action = 1;			//시도 횟수
 				
 		while( true ) {
 			/* 게임 작성 */
@@ -31,16 +31,21 @@ public class Prob05 {
 						break;
 					} else if (score > correctNumber) {
 						System.out.println("더 낮게");
+						
+						//시도한 숫자가 기존의 높은 값보다 낮은 경우
 						if(score < highScore) {
 							highScore = score;
 						}
 					} else {
 						System.out.println("더 높게");
+						
+						//시도한 숫자가 기존의 낮은 값보다 높은 경우
 						if(score > lowScore) {
 							lowScore = score;
 						}
 					}
 
+				//시도횟수++
 				action++;
 			}
 		
@@ -51,6 +56,8 @@ public class Prob05 {
 			if( "y".equals( answer ) == false ) {
 				break;
 			} else {
+				
+				//변수들 초기화
 				lowScore = 1;
 				highScore = 100;
 				action = 1;
