@@ -21,6 +21,7 @@ public class GoodsApp {
 			price = scanner.nextInt();
 			qty = scanner.nextInt();
 			
+//			System.out.println(name + "," + price + "," + qty);
 			goods[i] = new Goods();
 			
 			goods[i].setName(name);
