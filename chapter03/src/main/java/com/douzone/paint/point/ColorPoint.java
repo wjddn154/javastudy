@@ -1,8 +1,17 @@
-package paint;
+package com.douzone.paint.point;
 
 public class ColorPoint extends Point {
 	private String color;
 
+	public ColorPoint(int x, int y, String color) {
+		super(x, y); //자동으로 생성됨 //의도적으로 super를 선언하는 경우
+//		setX(x);
+//		setY(y);
+		
+		
+		this.color = color;
+	}
+	
 	public String getColor() {
 		return color;
 	}
