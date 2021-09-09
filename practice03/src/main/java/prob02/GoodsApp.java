@@ -11,13 +11,15 @@ public class GoodsApp {
 		Goods[] goods = new Goods[COUNT_GOODS];
 
 		// 상품 입력
-//		String input = scanner.nextLine();
+		String name = null;
+		int price = 0;
+		int qty = 0;
 		
 		//for문에 scanner.nextline() 사용해서 풀 것.
 		for(int i=0; i<COUNT_GOODS; i++) {
-			String name = scanner.next();	//next()사용시 공백기준으로 한문장씩 입력받는다
-			int price = scanner.nextInt();
-			int qty = scanner.nextInt();
+			name = scanner.next();	//next()사용시 공백기준으로 한문장씩 입력받는다
+			price = scanner.nextInt();
+			qty = scanner.nextInt();
 			
 			goods[i] = new Goods();
 			

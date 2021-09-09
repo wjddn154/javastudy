@@ -1,7 +1,5 @@
 package prob04;
 
-import java.util.Arrays;
-
 public class Prob04 {
 
 	public static void main(String[] args) {

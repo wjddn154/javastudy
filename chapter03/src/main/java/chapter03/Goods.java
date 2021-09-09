@@ -1,12 +1,18 @@
 package chapter03;
 
 public class Goods {
+	public static int countOfGoods = 0;
+	
+	
 	private String name;
 	private int price;
 	private int countStock;
 	private int countSold;
-	private static int TOTALCOUNT = 0;
 
+	public Goods() {
+		countOfGoods += 1;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -20,6 +26,9 @@ public class Goods {
 	}
 
 	public void setPrice(int price) {
+		if(price < 0) {
+			return;
+		}
 		this.price = price;
 	}
 
@@ -45,5 +54,12 @@ public class Goods {
 		System.out.println("countStock : " + this.countStock);
 		System.out.println("countSold : " + this.countSold);
 	}
+	
+	
+	public int calcDiscountPrice(int percentage) {
+		
+		return price * percentage / 100;
+	}
+	
 
 }
