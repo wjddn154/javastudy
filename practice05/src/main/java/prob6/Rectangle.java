@@ -22,8 +22,7 @@ public class Rectangle extends Shape implements Resizable {
 	}
 	
 	
-	//생성자
-	public Rectangle() { }
+	//생성자 Rectangle
 	public Rectangle(double width, double height) {
 		this.width = width;
 		this.height = height;
