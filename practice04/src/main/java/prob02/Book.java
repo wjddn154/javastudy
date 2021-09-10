@@ -22,12 +22,11 @@ public class Book {
 	
 	
 	//Book 객체의 정보를 출력
-	public void displayBookInfo(Book[] books) {
-		System.out.println("22");
-		for(int i=0; i<books.length; i++) {
-			System.out.println("책 제목:" + name + ", 작가:" + author + ", 대여 유무:" + stateCode);
-		}
-	}
+//	public void displayBookInfo(Book[] books) {
+//		for(int i=0; i<books.length; i++) {
+//			System.out.println("책 제목:" + name + ", 작가:" + author + ", 대여 유무:" + stateCode);
+//		}
+//	}
 	
 	
 	
