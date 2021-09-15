@@ -33,6 +33,7 @@ public class BookShop {
 		displayBookInfo(books);
 	}
 
+	//삼항으로 처리
 	private static void displayBookInfo(Book[] books) {
 		String check;
 		for(int i=0; i<books.length; i++) {

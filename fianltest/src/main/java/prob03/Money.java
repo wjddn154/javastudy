@@ -4,13 +4,12 @@ import java.util.Objects;
 
 public class Money {
 	private int amount;
-	
+
 	/* 코드 작성 */
 	public Money(int i) {
 		this.amount = i;
 	}
-	
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(amount);
@@ -28,35 +27,56 @@ public class Money {
 		return amount == other.amount;
 	}
 
-	
-//	int check = 0;
 	public Money add(Money money) {
-//		check = amount;
-//		System.out.println(" 1 = " + check);
-		this.amount += money.amount;
-//		System.out.println(" 1 = " + check);
-		
-		return new Money(amount);
+
+		return new Money(this.amount + money.amount);
 	}
-	
+
 	public Money minus(Money money) {
-		System.out.println("2 = "  + this.amount);
-		System.out.println("2 = "  + money.amount);
-		this.amount = amount - money.amount;
 
-		return new Money(amount);
+		return new Money(this.amount - money.amount);
 	}
-	
+
 	public Money multiply(Money money) {
-		this.amount *= money.amount;
-		return new Money(amount);
-	}
-	
-	public Money devide(Money money) {
-		this.amount /= money.amount;
-		System.out.println(amount);
 
-		return new Money(amount);
+		return new Money(this.amount * money.amount);
 	}
-	
+
+	public Money devide(Money money) {
+
+		return new Money(this.amount / money.amount);
+	}
+
+//	public Object add(Money money) {
+//		if(money instanceof Money) {
+//			return new Money(this.amount + money.amount);
+//		}
+//		
+//		return null;
+//	}
+
+//	public Object minus(Money money) {
+//		if(money instanceof Money) {
+//			return new Money(this.amount - money.amount);
+//		}
+//		
+//		return null;
+//	}
+
+//	public Object multiply(Money money) {
+//		if(money instanceof Money) {
+//			return new Money(this.amount * money.amount);
+//		}
+//		
+//		return null;
+//	}
+
+//	public Object devide(Money money) {
+//		if(money instanceof Money) {
+//			return new Money(this.amount / money.amount);
+//		}
+//		
+//		return null;
+//	}
+
 }

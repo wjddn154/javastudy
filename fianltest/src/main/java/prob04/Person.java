@@ -15,14 +15,12 @@ public class Person {
 	public Person(String name) {
 		age = 12;
 		this.name = name;
-		
 		numberOfPerson++;
 	}
 	
 	public Person(int age, String name) {
 		this.age = age;
 		this.name = name;
-		
 		numberOfPerson++;
 	}
 	

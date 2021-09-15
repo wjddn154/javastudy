@@ -1,6 +1,7 @@
 package prob05;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -35,17 +36,35 @@ public class LoginMain {
 		}
 	}
 	
-	boolean idCheck;
-	boolean pwCheck;
-	
 	public static void login(List<User> users, User user ){
 		/* 코드 작성 */
+		Iterator<User> it = users.iterator();
+		boolean check1 = false;
+		boolean check2 = false;
+		
+		//안됨 확인
 		for(int i=0; i<users.size(); i++) {
-			if(user.getId() == users[i]) {
-				
+			if(user.getId() == users.get(i).getId()) {
+				check1 = true;
+				System.out.println("11");
+				if(user.getPassword() == users.get(i).getPassword()) {
+					check2 = true;
+					System.out.println("22");
+				}
 			}
 		}
 		
+		if(check1 == false) {
+			throw new UserNotFoundException();
+		}
+		
+		if(check2 == false) {
+			throw new PasswordDismatchException();
+		}
 		
 	}
+	
+	
+	
+	
 }

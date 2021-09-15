@@ -29,9 +29,4 @@ public class SmartPhone extends MusicPhone {
 		System.out.println("앱실행");
 	}
 	
-//	private void playMusic() {
-//		System.out.println( "통화기능시작" );
-//
-//	}
-	
 }

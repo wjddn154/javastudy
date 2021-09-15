@@ -5,6 +5,7 @@ public class Depart extends Employee {
 	private String department;
 	
 	public Depart(String name, int salary, String department) {
+		//super() 부모메서드 호출 => Employee() 호출
 		setName(name);
 		setSalary(salary);
 		this.department = department;
