@@ -38,27 +38,28 @@ public class LoginMain {
 	
 	public static void login(List<User> users, User user ){
 		/* 코드 작성 */
-		Iterator<User> it = users.iterator();
 		boolean check1 = false;
 		boolean check2 = false;
 		
-		//안됨 확인
+		/*
+		 * Iterator<User> it = users.iterator(); int j = 0; while(it.hasNext()) {
+		 * if(user.getId().equals(users.get(i).getId())) { check1 = true;
+		 * if(user.getPassword().equals(users.get(i).getPassword())) { check2 = true; }
+		 * } }
+		 */
+		
 		for(int i=0; i<users.size(); i++) {
-			if(user.getId() == users.get(i).getId()) {
+			if(user.getId().equals(users.get(i).getId())) {
 				check1 = true;
-				System.out.println("11");
-				if(user.getPassword() == users.get(i).getPassword()) {
+				if(user.getPassword().equals(users.get(i).getPassword())) {
 					check2 = true;
-					System.out.println("22");
 				}
 			}
 		}
 		
 		if(check1 == false) {
 			throw new UserNotFoundException();
-		}
-		
-		if(check2 == false) {
+		} else if(check2 == false) {
 			throw new PasswordDismatchException();
 		}
 		
