@@ -28,14 +28,14 @@ public class ChatServerTread extends Thread {
 	@Override
 	public void run() {
 		//1. Remote Host Information
-//		InetSocketAddress inetRemoteSocketAddress = (InetSocketAddress) socket.getRemoteSocketAddress();
-//		String remoteHostAddress = inetRemoteSocketAddress.getAddress().getHostAddress();
-//		int remoteHostPort = inetRemoteSocketAddress.getPort();
-//		log("클라이언트로부터 연결되었습니다." + "[" + remoteHostAddress + ":" + remoteHostPort + "]");
+		InetSocketAddress inetRemoteSocketAddress = (InetSocketAddress) socket.getRemoteSocketAddress();
+		String remoteHostAddress = inetRemoteSocketAddress.getAddress().getHostAddress();
+		int remoteHostPort = inetRemoteSocketAddress.getPort();
+		log("클라이언트로부터 연결되었습니다." + "[" + remoteHostAddress + ":" + remoteHostPort + "]");
 		
 			try {
 				//연결 확인
-				System.out.println("서버 : " + socket.getInetAddress() + " IP의 클라이언트와 연결되었습니다.");
+//				System.out.println("서버 : " + socket.getInetAddress() + " IP의 클라이언트와 연결되었습니다.");
 				
 				//2. 스트림 얻기
 				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
@@ -44,6 +44,7 @@ public class ChatServerTread extends Thread {
 				//3. 요청 처리
 				while(true) {
 					String request = bufferedReader.readLine();
+					System.out.println("request : " + request);
 					if(request == null) {
 						log("클라이언트로 부터 연결 끊김");
 						//클라이언트가 "quit"를 보내지않고 소켓을 닫은 경우
@@ -76,11 +77,12 @@ public class ChatServerTread extends Thread {
 		this.nickname = nickName;
 		
 		String data = nickName + "님이 참여하였습니다.";
-		broadcast(data);
 		
 		/* wrtier pool에 저장 */
 		addWriter(writer);
 		
+		broadcast(data);
+
 		//ack (대답)
 		PrintWriter printWriter = (PrintWriter) writer;
 		printWriter.println("join:ok");
@@ -92,7 +94,7 @@ public class ChatServerTread extends Thread {
 	
 	//현재 Thread의 writer(printWriter)를 저장
 	private void addWriter(Writer writer) {
-		
+		System.out.println(writer);
 		//synchronized 키워드는 여러 thread가 하나의 공유 객체에 접근할 때, 동기화를 보장해준다
 		synchronized (listWriters) {
 			listWriters.add(writer);	
@@ -116,6 +118,7 @@ public class ChatServerTread extends Thread {
 		//직접 코딩
 		System.out.println(message);
 		broadcast(message);
+
 	}
 	
 	private void doQuit(Writer writer) {
