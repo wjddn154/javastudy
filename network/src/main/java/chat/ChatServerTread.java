@@ -9,13 +9,13 @@ import java.io.Writer;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ChatServerTread extends Thread {
 	private String nickname;
 	private Socket socket;
-	List<Writer> listWriters = new ArrayList<Writer>();
+	List<Writer> listWriters;
+//	List<Writer> listWriters = new ArrayList<Writer>();
 	
 	
 	public ChatServerTread(Socket socket, List<Writer> listwriWriters) {
@@ -31,7 +31,7 @@ public class ChatServerTread extends Thread {
 		InetSocketAddress inetRemoteSocketAddress = (InetSocketAddress) socket.getRemoteSocketAddress();
 		String remoteHostAddress = inetRemoteSocketAddress.getAddress().getHostAddress();
 		int remoteHostPort = inetRemoteSocketAddress.getPort();
-		log("클라이언트로부터 연결되었습니다." + "[" + remoteHostAddress + ":" + remoteHostPort + "]");
+		log("클라이언트로부터 연결되었습니다. [" + remoteHostAddress + ":" + remoteHostPort + "]");
 		
 			try {
 				//연결 확인
@@ -42,8 +42,9 @@ public class ChatServerTread extends Thread {
 				PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8), true);
 			
 				//3. 요청 처리
+				String request = null;
 				while(true) {
-					String request = bufferedReader.readLine();
+					request = bufferedReader.readLine();
 					System.out.println("request : " + request);
 					if(request == null) {
 						log("클라이언트로 부터 연결 끊김");
@@ -77,24 +78,23 @@ public class ChatServerTread extends Thread {
 		this.nickname = nickName;
 		
 		String data = nickName + "님이 참여하였습니다.";
+		broadcast(data);
 		
 		/* wrtier pool에 저장 */
 		addWriter(writer);
 		
-		broadcast(data);
 
 		//ack (대답)
 		PrintWriter printWriter = (PrintWriter) writer;
-		printWriter.println("join:ok");
+//		printWriter.println("join:ok");
 		printWriter.flush();
-		
 		
 	}
 	
 	
 	//현재 Thread의 writer(printWriter)를 저장
 	private void addWriter(Writer writer) {
-		System.out.println(writer);
+		
 		//synchronized 키워드는 여러 thread가 하나의 공유 객체에 접근할 때, 동기화를 보장해준다
 		synchronized (listWriters) {
 			listWriters.add(writer);	
@@ -104,7 +104,6 @@ public class ChatServerTread extends Thread {
 	
 	//서버에 연결된 모든 클라이언트에 메세지를 보내는(브로드캐스트) 메소드
 	private void broadcast(String data) {
-		
 		synchronized (listWriters) {
 			for(Writer writer : listWriters) {
 				PrintWriter printWriter = (PrintWriter) writer;
@@ -116,9 +115,8 @@ public class ChatServerTread extends Thread {
 
 	private void doMessage(String message) {
 		//직접 코딩
-		System.out.println(message);
+		message = nickname + ") " + message;
 		broadcast(message);
-
 	}
 	
 	private void doQuit(Writer writer) {

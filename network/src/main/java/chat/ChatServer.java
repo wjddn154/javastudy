@@ -6,6 +6,7 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 ////채팅 프로그램 과정
 //1 >> 키보드 연결 scanner (입력을 받음)
@@ -38,7 +39,7 @@ public class ChatServer {
 	public static void main(String[] args) {
 
 		ServerSocket serverSocket = null;
-		List<Writer> listWriters = null;
+		List<Writer> listWriters =  new ArrayList<Writer>();
 		Scanner scanner = null;
 		Socket socket = null;
 		

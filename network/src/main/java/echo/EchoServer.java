@@ -21,7 +21,7 @@ public class EchoServer {
 			while(true) {
 				Socket socket = serverSocket.accept();
 				new EchoServerReceiveThread(socket).start();
-			}
+			}				
 
 		} catch(IOException e) {
 			log("error: " + e);

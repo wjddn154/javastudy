@@ -11,7 +11,7 @@ import java.net.SocketException;
 import java.util.Scanner;
 
 public class ChattingClient {
-	private static final String SERVER_IP = "0.0.0.0";
+	private static final String SERVER_IP = "172.30.1.21";
 	private static final int SERVER_PORT = 8080;
 	
 	public static void main(String[] args) {
@@ -22,17 +22,16 @@ public class ChattingClient {
 				//1) 키보드 연결
 				scanner = new Scanner(System.in);
 				
-				//2) 연결
+				//2) 소켓 생성
 				socket = new Socket();
 
 				//3) 소켓 연결
 				socket.connect(new InetSocketAddress(SERVER_IP, SERVER_PORT));
 				
 				//4) reader/writer 생성
-				BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
-				PrintWriter pw = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true);
+				BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream(), "utf-8"));
+				PrintWriter pw = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "utf-8"), true);
 
-				
 				//5) join 프로토콜
 				System.out.print("닉네임>>" );
 			    String nickname = scanner.nextLine();
@@ -40,22 +39,24 @@ public class ChattingClient {
 			    pw.flush();
 				
 				//6) ChatClientReceiveThread 시작
-			    ChatClientReceiveThread chatClientReceiveThread = new ChatClientReceiveThread(socket, br, pw);
+			    ChatClientReceiveThread chatClientReceiveThread = new ChatClientReceiveThread(socket, br);
 			    chatClientReceiveThread.start();
+			    
+//			    boolean flag = true;
 			    
 			    //7) 키보드 입력 처리
 			    while( true ) {
-			       System.out.print( ">>" );
+//			       System.out.print( ">>" );
 			       String input = scanner.nextLine();
 			 				
 			       if( "quit".equals( input ) == true ) {
 			           // 8) quit 프로토콜 처리
 			    	   doQuit(pw);
-			    	   
+//			    	   socket.close();
 			           break;
 			       } else {
 			           // 9) 메시지 처리
-			    	   domMessage(input);
+			    	   doMessage(pw, input);
 			       }
 			    }
 		
@@ -84,8 +85,8 @@ public class ChattingClient {
 		pw.println("quit");
 	}
 
-	private static void domMessage(String msg) {
-		System.out.println("message : " + msg);
+	private static void doMessage(PrintWriter pw, String msg) {
+		pw.println("message:" + msg);
 		
 	}
 	
