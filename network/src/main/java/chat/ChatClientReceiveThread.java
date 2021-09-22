@@ -4,15 +4,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.net.SocketException;
 import java.nio.charset.StandardCharsets;
 
 public class ChatClientReceiveThread extends Thread {
 	private Socket socket;
 	private BufferedReader bufferedReader;
 
-	public ChatClientReceiveThread(Socket socket, BufferedReader br) {
+	public ChatClientReceiveThread(Socket socket) {
 		this.socket = socket;
-		this.bufferedReader = br;
 	}
 
 	@Override
@@ -21,17 +21,17 @@ public class ChatClientReceiveThread extends Thread {
 		try {
 			/* reader를 통해 읽은 데이터 콘솔에 출력하기 (message 처리) */
 			bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
-//			printWriter = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8), true);
-	
+			
 			while(true) {
-				if(socket.isClosed() == false) {
-//					Strteming data = bufferedReader.readLine();
-//					Sys.out.println(data);
-					System.out.println(bufferedReader.readLine());
+				String data = bufferedReader.readLine();
+				if (data == null || data.equals("quit")) {
+					break;
 				}
+					System.out.println(data);
 			}
-		
 
+		} catch (SocketException e) {
+			System.out.println("서버에서 퇴장하였습니다.");
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {

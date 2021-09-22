@@ -23,19 +23,16 @@ public class ChatServerTread extends Thread {
 		this.listWriters = listwriWriters;
 	}
 	
-	
-	
 	@Override
 	public void run() {
 		//1. Remote Host Information
+		//연결 확인
 		InetSocketAddress inetRemoteSocketAddress = (InetSocketAddress) socket.getRemoteSocketAddress();
 		String remoteHostAddress = inetRemoteSocketAddress.getAddress().getHostAddress();
 		int remoteHostPort = inetRemoteSocketAddress.getPort();
 		log("클라이언트로부터 연결되었습니다. [" + remoteHostAddress + ":" + remoteHostPort + "]");
 		
 			try {
-				//연결 확인
-//				System.out.println("서버 : " + socket.getInetAddress() + " IP의 클라이언트와 연결되었습니다.");
 				
 				//2. 스트림 얻기
 				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
@@ -59,9 +56,13 @@ public class ChatServerTread extends Thread {
 					if("join".equals(tokens[0])) {
 						doJoin( tokens[1], printWriter);
 					} else if("message".equals(tokens[0])) {
-						doMessage(tokens[1]);
+						//메시지로 공백(enter)을 입력하였을 때 처리
+						if(tokens.length != 1) {
+							doMessage(tokens[1]);
+						}
 					} else if("quit".equals(tokens[0])) {
 						doQuit(printWriter);
+						break;
 					} else {
 						log("에러 : 알 수 없는 요청(" + tokens[0] + ")");
 					}
@@ -122,6 +123,7 @@ public class ChatServerTread extends Thread {
 	private void doQuit(Writer writer) {
 		removeWriter(writer);
 
+		//퇴장 알림 이전에 유저가 나가야함
 		String data = nickname + "님이 퇴장하였습니다.";
 		broadcast(data);
 	}
@@ -137,7 +139,7 @@ public class ChatServerTread extends Thread {
 		
 	}
 		
-	private void log(String log) {
+	public void log(String log) {
 		System.out.println("[ChatServerThread] " + log);		
 		
 	}

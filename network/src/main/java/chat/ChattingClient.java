@@ -11,7 +11,7 @@ import java.net.SocketException;
 import java.util.Scanner;
 
 public class ChattingClient {
-	private static final String SERVER_IP = "172.30.1.21";
+	private static final String SERVER_IP = "169.254.224.168";
 	private static final int SERVER_PORT = 8080;
 	
 	public static void main(String[] args) {
@@ -33,33 +33,30 @@ public class ChattingClient {
 				PrintWriter pw = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "utf-8"), true);
 
 				//5) join 프로토콜
-				System.out.print("닉네임>>" );
+				System.out.print("닉네임>> " );
 			    String nickname = scanner.nextLine();
 			    pw.println( "join:" + nickname );
 			    pw.flush();
 				
 				//6) ChatClientReceiveThread 시작
-			    ChatClientReceiveThread chatClientReceiveThread = new ChatClientReceiveThread(socket, br);
+			    ChatClientReceiveThread chatClientReceiveThread = new ChatClientReceiveThread(socket);
 			    chatClientReceiveThread.start();
 			    
-//			    boolean flag = true;
-			    
 			    //7) 키보드 입력 처리
+			    String input;
 			    while( true ) {
 //			       System.out.print( ">>" );
-			       String input = scanner.nextLine();
+			       input = scanner.nextLine();
 			 				
 			       if( "quit".equals( input ) == true ) {
 			           // 8) quit 프로토콜 처리
 			    	   doQuit(pw);
-//			    	   socket.close();
 			           break;
 			       } else {
 			           // 9) 메시지 처리
 			    	   doMessage(pw, input);
 			       }
 			    }
-		
 			} catch (SocketException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -78,7 +75,6 @@ public class ChattingClient {
 				}
 				
 			}
-		
 	}
 
 	private static void doQuit(PrintWriter pw) {
@@ -87,7 +83,6 @@ public class ChattingClient {
 
 	private static void doMessage(PrintWriter pw, String msg) {
 		pw.println("message:" + msg);
-		
 	}
 	
 	
