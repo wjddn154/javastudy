@@ -16,7 +16,7 @@ public class UDPEchoServer {
 			socket = new DatagramSocket(PORT);
 			
 			while(true) {
-				//2. 데이서 수신
+				//2. 데이터 수신
 				DatagramPacket rcvPacket = new DatagramPacket(new byte[1024], 1024);
 				socket.receive(rcvPacket);	//blocking... (데이터를 받으면 blocking이 풀림 올때까지 대기)
 	

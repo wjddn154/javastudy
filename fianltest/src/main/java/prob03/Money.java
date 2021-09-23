@@ -47,36 +47,4 @@ public class Money {
 		return new Money(this.amount / money.amount);
 	}
 
-//	public Object add(Money money) {
-//		if(money instanceof Money) {
-//			return new Money(this.amount + money.amount);
-//		}
-//		
-//		return null;
-//	}
-
-//	public Object minus(Money money) {
-//		if(money instanceof Money) {
-//			return new Money(this.amount - money.amount);
-//		}
-//		
-//		return null;
-//	}
-
-//	public Object multiply(Money money) {
-//		if(money instanceof Money) {
-//			return new Money(this.amount * money.amount);
-//		}
-//		
-//		return null;
-//	}
-
-//	public Object devide(Money money) {
-//		if(money instanceof Money) {
-//			return new Money(this.amount / money.amount);
-//		}
-//		
-//		return null;
-//	}
-
 }

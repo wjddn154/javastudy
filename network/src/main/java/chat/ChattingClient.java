@@ -11,7 +11,7 @@ import java.net.SocketException;
 import java.util.Scanner;
 
 public class ChattingClient {
-	private static final String SERVER_IP = "169.254.224.168";
+	private static final String SERVER_IP = "192.168.56.1";
 	private static final int SERVER_PORT = 8080;
 	
 	public static void main(String[] args) {
@@ -45,7 +45,7 @@ public class ChattingClient {
 			    //7) 키보드 입력 처리
 			    String input;
 			    while( true ) {
-//			       System.out.print( ">>" );
+			       System.out.print( ">> " );
 			       input = scanner.nextLine();
 			 				
 			       if( "quit".equals( input ) == true ) {

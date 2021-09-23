@@ -15,8 +15,6 @@ public class ChatServerTread extends Thread {
 	private String nickname;
 	private Socket socket;
 	List<Writer> listWriters;
-//	List<Writer> listWriters = new ArrayList<Writer>();
-	
 	
 	public ChatServerTread(Socket socket, List<Writer> listwriWriters) {
 		this.socket = socket; 

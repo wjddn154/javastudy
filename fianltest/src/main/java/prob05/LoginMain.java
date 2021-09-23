@@ -41,13 +41,6 @@ public class LoginMain {
 		boolean check1 = false;
 		boolean check2 = false;
 		
-		/*
-		 * Iterator<User> it = users.iterator(); int j = 0; while(it.hasNext()) {
-		 * if(user.getId().equals(users.get(i).getId())) { check1 = true;
-		 * if(user.getPassword().equals(users.get(i).getPassword())) { check2 = true; }
-		 * } }
-		 */
-		
 		for(int i=0; i<users.size(); i++) {
 			if(user.getId().equals(users.get(i).getId())) {
 				check1 = true;
