@@ -58,7 +58,7 @@ public class Goods {
 	
 	public int calcDiscountPrice(int percentage) {
 		
-		return price * percentage / 100;
+		return price * (100 - percentage) / 100;
 	}
 	
 

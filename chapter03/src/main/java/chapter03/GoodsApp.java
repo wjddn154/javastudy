@@ -12,7 +12,8 @@ public class GoodsApp {
 		
 		
 		goods.setPrice(-1);
-		int discountPrice = goods.calcDiscountPrice(50);
+		System.out.println(goods.getPrice());
+		int discountPrice = goods.calcDiscountPrice(25);
 		System.out.println("discountPrice : " + discountPrice);
 		
 		System.out.println(Goods.countOfGoods);

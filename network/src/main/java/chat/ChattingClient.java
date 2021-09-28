@@ -52,6 +52,8 @@ public class ChattingClient {
 			           // 8) quit 프로토콜 처리
 			    	   doQuit(pw);
 			           break;
+			       } else if ("list".equals(input) == true) {
+			    	   doList(pw);
 			       } else {
 			           // 9) 메시지 처리
 			    	   doMessage(pw, input);
@@ -75,6 +77,10 @@ public class ChattingClient {
 				}
 				
 			}
+	}
+
+	private static void doList(PrintWriter pw) {
+		pw.println("list");
 	}
 
 	private static void doQuit(PrintWriter pw) {

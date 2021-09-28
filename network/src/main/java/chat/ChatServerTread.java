@@ -15,6 +15,7 @@ public class ChatServerTread extends Thread {
 	private String nickname;
 	private Socket socket;
 	List<Writer> listWriters;
+	private User user;
 	
 	public ChatServerTread(Socket socket, List<Writer> listwriWriters) {
 		this.socket = socket; 
@@ -58,6 +59,8 @@ public class ChatServerTread extends Thread {
 						if(tokens.length != 1) {
 							doMessage(tokens[1]);
 						}
+					} else if("list".equals(tokens[0])) {
+						doList(printWriter);
 					} else if("quit".equals(tokens[0])) {
 						doQuit(printWriter);
 						break;
@@ -98,6 +101,8 @@ public class ChatServerTread extends Thread {
 		synchronized (listWriters) {
 			listWriters.add(writer);	
 		}
+		
+	
 	}
 	
 	
@@ -116,6 +121,11 @@ public class ChatServerTread extends Thread {
 		//직접 코딩
 		message = nickname + ") " + message;
 		broadcast(message);
+	}
+	
+	private void doList(Writer writer) {
+		
+		System.out.println(listWriters);
 	}
 	
 	private void doQuit(Writer writer) {
